@@ -48,15 +48,7 @@ typedef struct printHandler
 	int (*f)(va_list ap, flags_t *f);
 } handler;
 
-
-int print_int(va_list l, flags_t *f);
-int print_number(int n);
 int print_unsigned(va_list l, flags_t *f);
-int count_digit(int i);
-int print_hex(va_list l, flags_t *f);
-int print_hex_big(va_list l, flags_t *f);
-int print_binary(va_list l, flags_t *f);
-int print_octal(va_list l, flags_t *f);
 char *convert(unsigned int num, int base, int uppercase);
 int _printf(const char *format, ...);
 void print_buffer(char buffer[], int *buff_ind);
