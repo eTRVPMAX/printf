@@ -11,17 +11,22 @@ int print_int(va_list l, flags_t *f)
 {
 	int n = va_arg(l, int);
 	int final = 0;
+	int has_space = f->space == 1 && f->plus == 0 && n >= 0;
+	int has_plus = f->plus == 1 && n >= 0;
 
-	if (f->space == 1 && f->plus == 0 && n >= 0)
+	if (has_space)
 		final += _putchar(' ');
-	if (f->plus == 1 && n >= 0)
+	if (has_plus)
 		final += _putchar('+');
+
 	if (n < 0)
 	{
 		final += _putchar('-');
 		n = -n;
 	}
+
 	final += print_number(n);
+
 	return (final);
 }
 
@@ -48,18 +53,13 @@ int print_unsigned(va_list l, flags_t *f)
  */
 int print_number(int n)
 {
-	unsigned int n1 = n;
+	unsigned int n1 = (n < 0) ? -n : n;
 	int final = 0;
 
-	if (n < 0)
-	{
-		final += _putchar('-');
-		n1 = -n;
-	}
-
-	if (n1 / 10)
-		final += print_number(n1 / 10);
-	final += _putchar((n1 % 10) + '0');
+	do {
+		final += _putchar((n1 % 10) + '0');
+		n1 /= 10;
+	} while (n1 > 0);
 
 	return (final);
 }
