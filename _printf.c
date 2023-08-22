@@ -3,10 +3,10 @@
 /**
  * _printf - Prints formatted output to the standard output stream.
  * @format: A pointer to a constant format string.
- * Return: The number of characters printed (excluding the null byte used to end output to strings).
- * -1 if an error occurs.
+ *
+ * Return: The number of characters printed (excluding the null byte used to
+ * end output to strings), or -1 if an error occurs.
  */
-
 int _printf(const char *format, ...)
 {
     int (*pfunc)(va_list, flags_t *);
@@ -17,8 +17,11 @@ int _printf(const char *format, ...)
 
     va_start(arguments, format);
 
-    if (format == NULL || (format[0] == '%' && !format[1]))
+    if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+    {
+        va_end(arguments);
         return -1;
+    }
 
     for (p = format; *p != '\0'; p++)
     {
