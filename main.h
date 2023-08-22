@@ -17,8 +17,8 @@
  */
 typedef struct buff
 {
-    char buffer[BUFFER_SIZE];
-    int index;
+	char buffer[BUFFER_SIZE];
+	int index;
 } OutputBuffer;
 
 
@@ -69,7 +69,6 @@ int _puts(char *str);
 int print_rot13(va_list l, flags_t *f);
 int print_reverse(va_list l, flags_t *f);
 int print_exS(va_list l, flags_t *f);
-int print_address(va_list l, flags_t *f);
 int print_percent(va_list l, flags_t *f);
 int get_flag(char s, flags_t *f);
 #endif

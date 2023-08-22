@@ -12,23 +12,23 @@
  */
 int print_base(va_list l, flags_t *f, int base, int uppercase)
 {
-    unsigned int num = va_arg(l, unsigned int);
-    char *str = convert(num, base, uppercase);
-    int count = 0;
+	unsigned int num = va_arg(l, unsigned int);
+	char *str = convert(num, base, uppercase);
+	int count = 0;
 
-    if (f->hash == 1 && str[0] != '0')
-    {
-        if (base == 2)
-            count += _puts("0b");
-        else if (base == 8)
-            count += _putchar('0');
-        else if (base == 16)
-            count += _puts(uppercase ? "0X" : "0x");
-    }
+	if (f->hash == 1 && str[0] != '0')
+	{
+		if (base == 2)
+			count += _puts("0b");
+		else if (base == 8)
+			count += _putchar('0');
+		else if (base == 16)
+			count += _puts(uppercase ? "0X" : "0x");
+	}
 
-    count += _puts(str);
+	count += _puts(str);
 
-    return count;
+	return (count);
 }
 
 /**
@@ -40,7 +40,7 @@ int print_base(va_list l, flags_t *f, int base, int uppercase)
  */
 int print_binary(va_list l, flags_t *f)
 {
-    return print_base(l, f, 2, 0);
+	return (print_base(l, f, 2, 0));
 }
 
 /**
@@ -52,7 +52,7 @@ int print_binary(va_list l, flags_t *f)
  */
 int print_octal(va_list l, flags_t *f)
 {
-    return print_base(l, f, 8, 0);
+	return (print_base(l, f, 8, 0));
 }
 
 /**
@@ -64,7 +64,7 @@ int print_octal(va_list l, flags_t *f)
  */
 int print_hex(va_list l, flags_t *f)
 {
-    return print_base(l, f, 16, 1);
+	return (print_base(l, f, 16, 1));
 }
 
 /**
@@ -76,6 +76,6 @@ int print_hex(va_list l, flags_t *f)
  */
 int print_hex_big(va_list l, flags_t *f)
 {
-    return print_base(l, f, 16, 0);
+	return (print_base(l, f, 16, 0));
 }
 

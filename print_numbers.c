@@ -9,20 +9,20 @@
  */
 int print_int(va_list l, flags_t *f)
 {
-    int n = va_arg(l, int);
-    int final = 0;
+	int n = va_arg(l, int);
+	int final = 0;
 
-    if (f->space == 1 && f->plus == 0 && n >= 0)
-        final += _putchar(' ');
-    if (f->plus == 1 && n >= 0)
-        final += _putchar('+');
-    if (n < 0)
-    {
-        final += _putchar('-');
-        n = -n;
-    }
-    final += print_number(n);
-    return (final);
+	if (f->space == 1 && f->plus == 0 && n >= 0)
+		final += _putchar(' ');
+	if (f->plus == 1 && n >= 0)
+		final += _putchar('+');
+	if (n < 0)
+	{
+		final += _putchar('-');
+		n = -n;
+	}
+	final += print_number(n);
+	return (final);
 }
 
 /**
@@ -34,11 +34,11 @@ int print_int(va_list l, flags_t *f)
  */
 int print_unsigned(va_list l, flags_t *f)
 {
-    unsigned int u = va_arg(l, unsigned int);
-    char *str = convert(u, 10, 0);
+	unsigned int u = va_arg(l, unsigned int);
+	char *str = convert(u, 10, 0);
 
-    (void)f;
-    return _puts(str);
+	(void)f;
+	return (_puts(str));
 }
 
 /**
@@ -48,19 +48,19 @@ int print_unsigned(va_list l, flags_t *f)
  */
 int print_number(int n)
 {
-    unsigned int n1 = n;
-    int final = 0;
+	unsigned int n1 = n;
+	int final = 0;
 
-    if (n < 0)
-    {
-        final += _putchar('-');
-        n1 = -n;
-    }
+	if (n < 0)
+	{
+		final += _putchar('-');
+		n1 = -n;
+	}
 
-    if (n1 / 10)
-        final += print_number(n1 / 10);
-    final += _putchar((n1 % 10) + '0');
+	if (n1 / 10)
+		final += print_number(n1 / 10);
+	final += _putchar((n1 % 10) + '0');
 
-    return (final);
+	return (final);
 }
 

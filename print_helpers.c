@@ -41,11 +41,12 @@ int print_char(va_list l, flags_t *f)
  */
 int _strlen(const char *s)
 {
-    int len = 0;
-    while (s[len] != '\0')
-    {
-        len++;
-    }
-    return (len);
+	int len = 0;
+
+	while (s[len] != '\0')
+	{
+		len++;
+	}
+	return (len);
 }
 
