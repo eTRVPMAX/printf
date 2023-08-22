@@ -9,51 +9,45 @@
  */
 int _printf(const char *format, ...)
 {
-    int (*pfunc)(va_list, flags_t *);
-    const char *p;
-    va_list arguments;
-    flags_t flags = {0, 0, 0};
-    int count = 0;
+	int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
+	int count = 0;
 
-    va_start(arguments, format);
+	va_start(arguments, format);
 
-    if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-    {
-        va_end(arguments);
-        return -1;
-    }
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
 
-    for (p = format; *p != '\0'; p++)
-    {
-        if (*p != '%')
-        {
-            count += _putchar(*p);
-            continue;
-        }
+	for (p = format; *p != '\0'; p++)
+	{
+		if (*p != '%')
+		{
+			count += _putchar(*p);
+			continue;
+		}
 
-        p++;
+		p++;
+		if (*p == '%')
+		{
+			count += _putchar('%');
+			continue;
+		}
 
-        if (*p == '%')
-        {
-            count += _putchar('%');
-            continue;
-        }
+		while (get_flag(*p, &flags))
+			p++;
 
-        while (get_flag(*p, &flags))
-            p++;
+		pfunc = get_print(*p);
+		if (pfunc)
+			count += pfunc(arguments, &flags);
+		else
+			count += _printf("%%%c", *p);
+	}
 
-        pfunc = get_print(*p);
+	_putchar(-1);
+	va_end(arguments);
 
-        if (pfunc)
-            count += pfunc(arguments, &flags);
-        else
-            count += _printf("%%%c", *p);
-    }
-
-    _putchar(-1);
-
-    va_end(arguments);
-
-    return count;
+	return (count);
 }
 
